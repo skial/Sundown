@@ -27,7 +27,7 @@ HxSundown::~HxSundown() {}
 	sdhtml_renderer(&callbacks, &options, 0);
 	markdown = sd_markdown_new(0, 16, &callbacks, &options);
 	
-	/* reinterpret_cast from - http://stackoverflow.com/questions/1673445/how-to-convert-byte-to-stdstring-in-c
+	/* reinterpret_cast from - http://stackoverflow.com/questions/1673445/how-to-convert-byte-to-stdstring-in-c */
 	
 	sd_markdown_render(ob, reinterpret_cast<const uint8_t*>(md.__s), static_cast<std::string>(md.__s).size(), markdown);
 	sd_markdown_free(markdown);
