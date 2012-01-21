@@ -11,11 +11,18 @@ import cpp.Lib;
 class Main {
 	
 	static function main() {
-		var md:String = Sundown.markdown(File.getContent('readme.md'));
+		
+		var sundown:Sundown = new Sundown();
+		
+		var md:String = sundown.render(File.getContent('readme.md'));
+		
 		trace(md);
+		
 		var file = File.write('readme.html');
 		file.writeString(md);
 		file.close();
+		
+		sundown.close();
 	}
 	
 }

@@ -9,13 +9,24 @@ package ;
 @:require(cpp)
 @:buildXml('<include name="../native.xml"/>')
 @:headerCode('#include "api.h"')
+@:headerClassCode('HxSundown sundown;')
 class Sundown {
 	
-	private static var output:String = '';
-
-	@:functionCode('HxSundown sundown = HxSundown();\n::Sundown_obj::output = sundown.markdown(text);')
-	public static function markdown(text:String) {
+	private var output:String;
+	
+	public function new():Void {
+		this.create();
+	}
+	
+	@:functionCode('sundown.markdown_new();')
+	private function create():Void { }
+	
+	@:functionCode('Sundown_obj::output = sundown.markdown_render(markdown);')
+	public function render(markdown:String):String {
 		return output;
 	}
+	
+	@:functionCode('sundown.markdown_free();')
+	public function close():Void { }
 	
 }

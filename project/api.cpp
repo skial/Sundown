@@ -1,8 +1,7 @@
 #include <hxcpp.h>
 #include <String.h>
-#include "api.h"
 #include <string>
-#include <iostream>
+#include "api.h"
 
 extern "C" {
 	#include "markdown.h"
@@ -10,32 +9,33 @@ extern "C" {
 	#include "html.h"
 }
 
-#define OUTPUT_UNIT 64
-
 HxSundown::HxSundown() {}
 HxSundown::~HxSundown() {}
 
-::String HxSundown::markdown(::String md) {
-	struct buf *ob;
-	struct sd_callbacks callbacks;
-	struct html_renderopt options;
-	struct sd_markdown *markdown;
-	::String output;
-	
-	ob = bufnew(OUTPUT_UNIT);
-	
+void HxSundown::markdown_new() {
 	sdhtml_renderer(&callbacks, &options, 0);
 	markdown = sd_markdown_new(0, 16, &callbacks, &options);
+}
+
+::String HxSundown::markdown_render(::String md) {
+	struct buf *ob;
 	
-	/* reinterpret_cast from - http://stackoverflow.com/questions/1673445/how-to-convert-byte-to-stdstring-in-c */
+	// create new buffer
+	ob = bufnew(128);
 	
+	// reinterpret_cast from - http://stackoverflow.com/questions/1673445/how-to-convert-byte-to-stdstring-in-c
 	sd_markdown_render(ob, reinterpret_cast<const uint8_t*>(md.__s), static_cast<std::string>(md.__s).size(), markdown);
-	sd_markdown_free(markdown);
 	
+	// cast to hxcpp string
 	output = ::String(reinterpret_cast<const char*>(ob->data), ob->size);
 	
-	/* cleanup */
+	// cleanup buffer
 	bufrelease(ob);
 	
+	// return rendered markdown
 	return output;
+}
+
+void HxSundown::markdown_free() {
+	sd_markdown_free(markdown);
 }

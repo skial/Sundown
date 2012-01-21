@@ -9,9 +9,16 @@ extern "C" {
 }
 
 class HxSundown {
+	private:
+		struct sd_markdown *markdown;
+		struct sd_callbacks callbacks;
+		struct html_renderopt options;
+		::String output;
 	public:
 		HxSundown();
 		~HxSundown();
 		
-		::String markdown(::String md);
+		void markdown_new();
+		::String markdown_render(::String md);
+		void markdown_free();
 };
