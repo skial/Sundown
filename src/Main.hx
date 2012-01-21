@@ -17,6 +17,7 @@ class Main {
 		var md:String = sundown.render(File.getContent('readme.md'));
 		
 		trace(md);
+		trace(sundown.render('## Hello Skial Bainn ##\n\n---\n\nHello again!'));
 		
 		var file = File.write('readme.html');
 		file.writeString(md);

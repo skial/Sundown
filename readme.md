@@ -21,7 +21,16 @@ Currently now available on ```haxelib```.
 
 The ```Sundown.hx``` can be place anywhere, the import files in the ```project/``` directory, and ```native.xml``` which both need to be at the same level as your ```bin/``` directory where ```HXCPP``` creates its ```Build.xml``` file.
 
-Once everything is in the correct place, just use ```var md:String = Sundown.markdown('## Your Markdown ##');``` and build.
+Once everything is in the correct place, use the following :
+
+```
+var sd:Sundown = new Sundown();
+var md1:String = sd.render('# Your Markdown 1 #');
+var md2:String = sd.render('## Your Markdown 2 ##');
+sd.close();
+```
+
+Then build. All done.
 
 ---
 
