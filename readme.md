@@ -1,5 +1,5 @@
 # [Sundown](https://github.com/tanoku/sundown) for Haxe / CPP #
-Still needs alot more testing.
+This was to start learning c/cpp, to try out the new hxcpp meta tags. Sundown.hx will changed alot.
 
 ---
 
