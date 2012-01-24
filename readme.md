@@ -1,5 +1,8 @@
 # [Sundown](https://github.com/tanoku/sundown) for Haxe / CPP #
-This was to start learning c/cpp, to try out the new hxcpp meta tags. Sundown.hx will changed alot.
+
+I started this to start learning c/cpp, to try out the new hxcpp meta tags.
+
+Sundown.hx will likely change. ALPHA ready.
 
 ---
 
@@ -21,9 +24,13 @@ Currently now available on ```haxelib```.
 
 The ```Sundown.hx``` can be place anywhere, the import files in the ```project/``` directory, and ```native.xml``` which both need to be at the same level as your ```bin/``` directory where ```HXCPP``` creates its ```Build.xml``` file.
 
-Once everything is in the correct place, use the following :
+Once everything is in the correct place, use one of the following :
 
 ```
+// one time markdown parsing
+Sundown.markdown('# Your Markdown #');
+
+// multi markdown parsing
 var sd:Sundown = new Sundown();
 var md1:String = sd.render('# Your Markdown 1 #');
 var md2:String = sd.render('## Your Markdown 2 ##');
