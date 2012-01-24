@@ -51,6 +51,24 @@ class TestExtensions extends TestCase {
 		assertEquals('<p><a href="' + autolink + '">' + autolink + '</a></p>', o.trim());
 	}
 	
+	public function testStrikethrough() {
+		var o = sd.render('~~strikethrough~~');
+		trace(o);
+		assertEquals('<p><del>strikethrough</del></p>', o.trim());
+	}
+	
+	public function testSpaceHeader() {
+		var o = sd.render('#this header will fail#');
+		trace(o);
+		assertFalse(o == '<h1>this header will fail</h1>');
+	}
+	
+	public function testSuperscript() {
+		var o = sd.render('this is the 2^(nd) time');
+		trace(o);
+		assertEquals('<p>this is the 2<sup>nd</sup> time</p>', o.trim());
+	}
+	
 	override public function tearDown():Void {
 		sd.close();
 	}
