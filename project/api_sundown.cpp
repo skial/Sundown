@@ -1,7 +1,7 @@
 #include <hxcpp.h>
 #include <String.h>
 #include <string>
-#include "api.h"
+#include "api_sundown.h"
 
 extern "C" {
 	#include "markdown.h"
@@ -12,9 +12,9 @@ extern "C" {
 HxSundown::HxSundown() {}
 HxSundown::~HxSundown() {}
 
-void HxSundown::markdown_new() {
+void HxSundown::markdown_new(int ext) {
 	sdhtml_renderer(&callbacks, &options, 0);
-	markdown = sd_markdown_new(0, 16, &callbacks, &options);
+	markdown = sd_markdown_new(ext, 16, &callbacks, &options);
 }
 
 ::String HxSundown::markdown_render(::String md) {
@@ -38,4 +38,26 @@ void HxSundown::markdown_new() {
 
 void HxSundown::markdown_free() {
 	sd_markdown_free(markdown);
+}
+
+::String HxSundown::markdown_static(::String md) {
+	struct buf *ob;
+	struct sd_markdown *_markdown;
+	struct sd_callbacks _callbacks;
+	struct html_renderopt _options;
+	::String _output;
+	
+	ob = bufnew(128);
+	
+	sdhtml_renderer(&_callbacks, &_options, 0);
+	_markdown = sd_markdown_new(0, 16, &_callbacks, &_options);
+	
+	
+	sd_markdown_render(ob, reinterpret_cast<const uint8_t*>(md.__s), static_cast<std::string>(md.__s).size(), _markdown);
+	sd_markdown_free(_markdown);
+	_output = ::String(reinterpret_cast<const char*>(ob->data), ob->size);
+	bufrelease(ob);
+	
+	return _output;
+	
 }

@@ -8,8 +8,8 @@
 	
 	<files id="haxe">
 		<compilerflag value="-I../project" />
-		<file name="../project/api.cpp" />
-		<depend name="../project/api.h" />
+		<file name="../project/api_sundown.cpp" />
+		<depend name="../project/api_sundown.h" />
 	</files>
 	
 	<files id="haxe">
