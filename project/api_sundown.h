@@ -22,5 +22,4 @@ class HxSundown {
 		void markdown_new(int ext);
 		::String markdown_render(::String md);
 		void markdown_free();
-		::String markdown_static(::String md);
 };

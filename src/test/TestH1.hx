@@ -36,12 +36,6 @@ class TestH1 extends TestCase {
 		assertEquals(expected, o.trim());
 	}
 	
-	public function testStaticH1() {
-		var o = Sundown.markdown(input);
-		trace(o);
-		assertEquals(expected, o.trim());
-	}
-	
 	override public function tearDown():Void {
 		md.close();
 	}

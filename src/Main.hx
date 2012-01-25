@@ -24,14 +24,9 @@ class Main {
 		
 		runner.run();
 		
-		var md:String = Sundown.markdown(File.getContent('readme.md'));
-		var file = File.write('readme_static1.html');
-		file.writeString(md);
-		file.close();
-		
 		var sd:Sundown = new Sundown();
-		md = sd.render(File.getContent('readme.md'));
-		file = File.write('readme1.html');
+		var md = sd.render(File.getContent('readme.md'));
+		var file = File.write('readme1.html');
 		file.writeString(md);
 		file.close();
 		sd.close();

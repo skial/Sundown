@@ -27,10 +27,6 @@ The ```Sundown.hx``` can be place anywhere, the import files in the ```project/`
 Once everything is in the correct place, use one of the following :
 
 ```
-// one time markdown parsing
-Sundown.markdown('# Your Markdown #');
-
-// multi markdown parsing
 var sd:Sundown = new Sundown();
 var md1:String = sd.render('# Your Markdown 1 #');
 var md2:String = sd.render('## Your Markdown 2 ##');
@@ -64,9 +60,7 @@ Then pass your ```Extensions``` object to your ```Sundown``` instance.
 
 ```
 var sd:Sundown = new Sundown(ex);
-
-// Currently does nothing with the passed extensions
-Sundown.markdown('# Your Markdown #', ex);
+...
 ```
 
 ---

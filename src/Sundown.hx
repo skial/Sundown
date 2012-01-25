@@ -41,11 +41,6 @@ class Sundown {
 	@:functionCode('sundown->markdown_free();')
 	public function close():Void { }
 	
-	@:functionCode('HxSundown* sd = new HxSundown;\nSundown_obj::o = sd->markdown_static(::cpp::Utf8_obj::encode(markdown));')
-	public static function markdown(markdown:String, ?ex:Extensions = null):String {
-		return o;
-	}
-	
 	// private fields
 	
 	private var ext:Int;
@@ -53,6 +48,9 @@ class Sundown {
 	private var output:String;
 	// force utf8 to be included in the source by hxcpp
 	private static var o:String = Utf8.encode('');
+	
+	@:functionCode('sundown = new HxSundown;\nsundown->markdown_new(Sundown_obj::ext);')
+	private function create():Void { }
 	
 	private function parseExtensions(ex:Extensions):Void {
 		if (ex.no_intra_emphasis) ext += (1<<0);
@@ -64,8 +62,5 @@ class Sundown {
 		if (ex.space_headers) ext += (1<<6);
 		if (ex.superscript) ext += (1<<7);
 	}
-	
-	@:functionCode('sundown = new HxSundown;\nsundown->markdown_new(Sundown_obj::ext);')
-	private function create():Void { }
 	
 }

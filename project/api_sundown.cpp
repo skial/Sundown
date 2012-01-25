@@ -37,25 +37,3 @@ void HxSundown::markdown_free() {
 	// cleanup buffer
 	bufrelease(output_buf);
 }
-
-::String HxSundown::markdown_static(::String md) {
-	struct buf *ob;
-	struct sd_markdown *_markdown;
-	struct sd_callbacks _callbacks;
-	struct html_renderopt _options;
-	::String _output;
-	
-	ob = bufnew(128);
-	
-	sdhtml_renderer(&_callbacks, &_options, 0);
-	_markdown = sd_markdown_new(0, 16, &_callbacks, &_options);
-	
-	
-	sd_markdown_render(ob, reinterpret_cast<const uint8_t*>(md.__s), static_cast<std::string>(md.__s).size(), _markdown);
-	sd_markdown_free(_markdown);
-	_output = ::String(reinterpret_cast<const char*>(ob->data), ob->size);
-	bufrelease(ob);
-	
-	return _output;
-	
-}
