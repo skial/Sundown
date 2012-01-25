@@ -22,7 +22,7 @@ typedef Extensions = {
 @:require(cpp)
 @:buildXml('<include name="../native.xml"/>')
 @:headerCode('#include "api_sundown.h"')
-@:headerClassCode('HxSundown sundown;')
+@:headerClassCode('HxSundown* sundown;')
 class Sundown {
 	
 	// public fields
@@ -33,16 +33,16 @@ class Sundown {
 		this.create();
 	}
 	
-	@:functionCode('Sundown_obj::output = sundown.markdown_render(::cpp::Utf8_obj::encode(markdown));')
+	@:functionCode('Sundown_obj::output = sundown->markdown_render(::cpp::Utf8_obj::encode(markdown));')
 	public function render(markdown:String):String {
 		return output;
 	}
 	
-	@:functionCode('sundown.markdown_free();')
+	@:functionCode('sundown->markdown_free();')
 	public function close():Void { }
 	
-	@:functionCode('HxSundown _sundown = HxSundown();\nSundown_obj::o = _sundown.markdown_static(::cpp::Utf8_obj::encode(markdown));')
-	public static function markdown(markdown:String):String {
+	@:functionCode('HxSundown* sd = new HxSundown;\nSundown_obj::o = sd->markdown_static(::cpp::Utf8_obj::encode(markdown));')
+	public static function markdown(markdown:String, ?ex:Extensions = null):String {
 		return o;
 	}
 	
@@ -65,7 +65,7 @@ class Sundown {
 		if (ex.superscript) ext += (1<<7);
 	}
 	
-	@:functionCode('sundown = HxSundown();\nsundown.markdown_new(Sundown_obj::ext);')
+	@:functionCode('sundown = new HxSundown;\nsundown->markdown_new(Sundown_obj::ext);')
 	private function create():Void { }
 	
 }

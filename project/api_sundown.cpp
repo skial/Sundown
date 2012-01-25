@@ -18,19 +18,14 @@ void HxSundown::markdown_new(int ext) {
 }
 
 ::String HxSundown::markdown_render(::String md) {
-	struct buf *ob;
-	
 	// create new buffer
-	ob = bufnew(128);
+	output_buf = bufnew(128);
 	
 	// reinterpret_cast from - http://stackoverflow.com/questions/1673445/how-to-convert-byte-to-stdstring-in-c
-	sd_markdown_render(ob, reinterpret_cast<const uint8_t*>(md.__s), static_cast<std::string>(md.__s).size(), markdown);
+	sd_markdown_render(output_buf, reinterpret_cast<const uint8_t*>(md.__s), static_cast<std::string>(md.__s).size(), markdown);
 	
 	// cast to hxcpp string
-	output = ::String(reinterpret_cast<const char*>(ob->data), ob->size);
-	
-	// cleanup buffer
-	bufrelease(ob);
+	output = ::String(reinterpret_cast<const char*>(output_buf->data), output_buf->size);
 	
 	// return rendered markdown
 	return output;
@@ -38,6 +33,9 @@ void HxSundown::markdown_new(int ext) {
 
 void HxSundown::markdown_free() {
 	sd_markdown_free(markdown);
+	
+	// cleanup buffer
+	bufrelease(output_buf);
 }
 
 ::String HxSundown::markdown_static(::String md) {

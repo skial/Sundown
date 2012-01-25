@@ -13,6 +13,7 @@ class HxSundown {
 		struct sd_markdown *markdown;
 		struct sd_callbacks callbacks;
 		struct html_renderopt options;
+		struct buf *output_buf;
 		::String output;
 	public:
 		HxSundown();
