@@ -2,7 +2,7 @@
 
 I started this to start learning c/cpp, to try out the new hxcpp meta tags.
 
-Sundown.hx will likely change. Consider it ALPHA quality.
+```Sundown.hx``` will likely change. Consider it ALPHA quality.
 
 ---
 
@@ -45,7 +45,7 @@ Then build. All done.
 
 ```Sundown``` has optional support for several (unofficial) Markdown extensions, such as non-strict emphasis, fenced code blocks, tables, autolinks, strikethrough and more.
 
-To turn extensions on, use the ```typedef Extensions`` found in ```Sundown.hx```.
+To turn extensions on, use the ```typedef Extensions``` found in ```Sundown.hx```.
 
 ```
 typedef Extensions = {
@@ -64,8 +64,10 @@ Then pass your ```Extensions``` object to your ```Sundown``` instance.
 
 ```
 var sd:Sundown = new Sundown(ex);
-//
+
+// Currently does nothing with the passed extensions
 Sundown.markdown('# Your Markdown #', ex);
+```
 
 ---
 
