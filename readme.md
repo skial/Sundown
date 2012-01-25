@@ -22,9 +22,9 @@ This project **accepts** and **encourages** contributions.
 
 Currently now available on ```haxelib```. 
 
-The ```Sundown.hx``` can be place anywhere, the import files in the ```project/``` directory, and ```native.xml``` which both need to be at the same level as your ```bin/``` directory where ```HXCPP``` creates its ```Build.xml``` file.
+The ```Sundown.hx``` can be place anywhere, the important files are in the ```project/``` directory, and ```native.xml``` which both need to be at the same level as your ```bin/``` directory where ```HXCPP``` creates its ```Build.xml``` file.
 
-Once everything is in the correct place, use one of the following :
+Once everything is in the correct place, use the following :
 
 ```
 var sd:Sundown = new Sundown();
@@ -33,7 +33,7 @@ var md2:String = sd.render('## Your Markdown 2 ##');
 sd.close();
 ```
 
-Then build. All done.
+Then build. All done!
 
 ---
 
