@@ -74,8 +74,18 @@ static value hx_sundown_render(value md_string, value markdown) {
 	
 	value output = alloc_string(reinterpret_cast<const char*>(output_buf->data));
 	
+	bufrelease(output_buf);
+	
 	return output;
+}
+
+static void hx_sundown_free(value markdown) {
+	val_check_kind(markdown, k_sd_markdown);
+	
+	sd_markdown_free((sd_markdown*)val_data(markdown));
 }
 
 DEFINE_PRIM(hx_sundown_create, 3);
 DEFINE_PRIM(hx_html_renderer_create, 2);
+DEFINE_PRIM(hx_sundown_render, 2);
+DEFINE_PRIM(hx_sundown_free, 1);
