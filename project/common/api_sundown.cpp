@@ -62,4 +62,20 @@ static value hx_sundown_create(value extensions, value cb, value opt) {
 	return alloc_abstract(k_sd_markdown, md);
 }
 
+static value hx_sundown_render(value md_string, value markdown) {
+	if (!val_is_string(md_string)) {
+		return val_null;
+	}
+	
+	val_check_kind(markdown, k_sd_markdown);
+	
+	buf *output_buf = bufnew(128);
+	sd_markdown_render(output_buf,  reinterpret_cast<const uint8_t*>(val_string(md_string)), val_strlen(md_string), (sd_markdown*)val_data(markdown));
+	
+	value output = alloc_string(reinterpret_cast<const char*>(output_buf->data));
+	
+	return output;
+}
+
 DEFINE_PRIM(hx_sundown_create, 3);
+DEFINE_PRIM(hx_html_renderer_create, 2);
