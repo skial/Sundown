@@ -1,0 +1,58 @@
+<xml>
+	<include name="${HXCPP}/build-tool/BuildCommon.xml" />
+	
+	<set name="SUN_DIR" value="libsundown/src" />
+	<set name="HTML_DIR" value="libsundown/html" />
+	
+	<files id="libsundown.common">
+		<!-- tell the compiler these are c files, not cpp files -->
+		<!--<compilerflag value="-x c" />-->
+		<!--<compilerflag value="-D_WIN32" if="windows" />-->
+		<!--<compilerflag value="-fPIC" />-->
+		<!--<compilerflag value="-Wall" />-->
+		<!--<compilerflag value="-Werror" unless="windows" />-->
+		<!--<compilerflag value="-Wsign-compare" unless="windows" />-->
+		<compilerflag value="-I${SUN_DIR}" />
+		<compilerflag value="-I${HTML_DIR}" />
+		<compilerflag value="-Ilibsundown" />
+		<!--<compilerflag value="-02" if="windows" />-->
+		<!--<cflag value="-fno-exceptions" />-->
+		<!--<compilerflag value="-EHsc" if="windows" />-->
+		
+		<!--<flag value="-03" unless="windows" />-->
+		<!--<flag value="-Wall" />-->
+		<!--<flag value="-Werror" />-->
+		
+		<file name="${SUN_DIR}/autolink.c" />
+		<file name="${SUN_DIR}/stack.c" />
+		<file name="${SUN_DIR}/markdown.c" />
+		<file name="${SUN_DIR}/buffer.c" />
+		
+		<depend name="${SUN_DIR}/autolink.h" />
+		<depend name="${SUN_DIR}/html_blocks.h" />
+		<depend name="${SUN_DIR}/stack.h" />
+		<depend name="${SUN_DIR}/markdown.h" />
+		<depend name="${SUN_DIR}/buffer.h" />
+		
+		<file name="${HTML_DIR}/houdini_href_e.c" />
+		<file name="${HTML_DIR}/houdini_html_e.c" />
+		<file name="${HTML_DIR}/html_smartypants.c" />
+		<file name="${HTML_DIR}/html.c" />
+		
+		<depend name="${HTML_DIR}/houdini.h" />
+		<depend name="${HTML_DIR}/html.h" />
+		
+		<!--<file name="common/api_sundown.cpp" />
+		<depend name="common/api_sundown.h" />-->
+	</files>
+	
+	<target id="sundown" output="sundown" tool="linker" toolid="static_link">
+		<outdir name="../ndll/${BINDIR}" />
+		<ext value=".ndll"/>
+		<files id="libsundown.common" />
+	</target>
+
+	<target id="default">
+		<target id="sundown"/>
+	</target>
+</xml>

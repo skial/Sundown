@@ -1,0 +1,3 @@
+[submodule "project/libsundown"]
+	path = project/libsundown
+	url = https://github.com/vmg/sundown.git
