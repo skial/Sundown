@@ -5,7 +5,9 @@
 	<set name="HTML_DIR" value="libsundown/html" />
 	
 	<files id="libsundown.common">
-		<!-- tell the compiler these are c files, not cpp files -->
+		<depend name="${HXCPP}/include/hx/Macros.h"/>
+		<depend name="${HXCPP}/include/hx/CFFI.h"/>
+		
 		<!--<compilerflag value="-x c" />-->
 		<!--<compilerflag value="-D_WIN32" if="windows" />-->
 		<!--<compilerflag value="-fPIC" />-->
