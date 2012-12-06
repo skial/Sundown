@@ -1,7 +1,8 @@
-#include <hxcpp.h>
+#include <hx/CFFI.h>
+/*#include <hxcpp.h>
 #include <String.h>
 #include <string>
-#include "api_sundown.h"
+#include "api_sundown.h"*/
 
 extern "C" {
 	#include "markdown.h"
@@ -9,7 +10,7 @@ extern "C" {
 	#include "html.h"
 }
 
-HxSundown::HxSundown() {}
+/*HxSundown::HxSundown() {}
 HxSundown::~HxSundown() {}
 
 void HxSundown::markdown_new(int ext) {
@@ -36,4 +37,29 @@ void HxSundown::markdown_free() {
 	
 	// cleanup buffer
 	bufrelease(output_buf);
+}*/
+
+DEFINE_KIND(k_sd_markdown);
+DEFINE_KIND(k_sd_callbacks);
+DEFINE_KIND(k_html_renderopt);
+
+static void hx_html_renderer_create(value cb, value opt) {
+	val_check_kind(cb, k_sd_callbacks);
+	val_check_kind(opt, k_html_renderopt);
+	
+	sdhtml_renderer( (sd_callbacks*)val_data(cb), (html_renderopt*)val_data(opt), 0 );
 }
+
+static value hx_sundown_create(value extensions, value cb, value opt) {
+	if (!val_is_int(extensions) ) {
+		return val_null;
+	}
+	
+	val_check_kind(cb, k_sd_callbacks);
+	val_check_kind(opt, k_html_renderopt);
+	
+	sd_markdown *md = sd_markdown_new( val_int(extensions), 16, (sd_callbacks*)val_data(cb), (html_renderopt*)val_data(opt) );
+	return alloc_abstract(k_sd_markdown, md);
+}
+
+DEFINE_PRIM(hx_sundown_create, 3);

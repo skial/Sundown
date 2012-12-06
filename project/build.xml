@@ -44,8 +44,8 @@
 		<depend name="${HTML_DIR}/houdini.h" />
 		<depend name="${HTML_DIR}/html.h" />
 		
-		<!--<file name="common/api_sundown.cpp" />
-		<depend name="common/api_sundown.h" />-->
+		<file name="common/api_sundown.cpp" />
+		<!--<depend name="common/api_sundown.h" />-->
 	</files>
 	
 	<target id="sundown" output="sundown" tool="linker" toolid="static_link">
