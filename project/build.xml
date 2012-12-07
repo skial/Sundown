@@ -9,7 +9,7 @@
 		<depend name="${HXCPP}/include/hx/CFFI.h"/>
 		
 		<!--<compilerflag value="-x c" />-->
-		<!--<compilerflag value="-D_WIN32" if="windows" />-->
+		<compilerflag value="-D_WIN32" if="windows" />
 		<!--<compilerflag value="-fPIC" />-->
 		<!--<compilerflag value="-Wall" />-->
 		<!--<compilerflag value="-Werror" unless="windows" />-->
@@ -17,6 +17,7 @@
 		<compilerflag value="-I${SUN_DIR}" />
 		<compilerflag value="-I${HTML_DIR}" />
 		<compilerflag value="-Ilibsundown" />
+		<compilerflag value="-Icommon" />
 		<!--<compilerflag value="-02" if="windows" />-->
 		<!--<cflag value="-fno-exceptions" />-->
 		<!--<compilerflag value="-EHsc" if="windows" />-->
@@ -45,7 +46,6 @@
 		<depend name="${HTML_DIR}/html.h" />
 		
 		<file name="common/api_sundown.cpp" />
-		<!--<depend name="common/api_sundown.h" />-->
 	</files>
 	
 	<set name="ndll-tool" value="dll" unless="iphone"/>
@@ -53,7 +53,7 @@
 	
 	<target id="sundown" output="sundown" tool="linker" toolid="${ndll-tool}">
 		<outdir name="../ndll/${BINDIR}" />
-		<ext value=".ndll"/>
+		<ext value=".ndll" />
 		<files id="libsundown.common" />
 	</target>
 

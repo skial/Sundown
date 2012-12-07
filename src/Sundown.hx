@@ -28,6 +28,8 @@ class Sundown {
 	
 	public function new(?ex:Extensions = null):Void {
 		ext = 0;
+		cb = { };
+		opt = { };
 		if (ex != null) parseExtensions(ex);
 		hx_html_render(cb, opt);
 		md = hx_create(ext, cb, opt );
@@ -44,8 +46,8 @@ class Sundown {
 	
 	private var ext:Int;
 	private var md:Dynamic;
-	private var cb:Dynamic = { };
-	private var opt:Dynamic = { };
+	private var cb:Dynamic;
+	private var opt:Dynamic;
 	
 	private var output:String;
 	
