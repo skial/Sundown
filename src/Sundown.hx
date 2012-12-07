@@ -1,6 +1,10 @@
 package ;
 
-import cpp.Utf8;
+#if cpp
+import cpp.Lib;
+#elseif neko
+import neko.Lib;
+#end
 
 /**
  * ...
@@ -18,11 +22,6 @@ typedef Extensions = {
 	var superscript:Bool;
 }
 
-@:final
-@:require(cpp)
-@:buildXml('<include name="../native.xml"/>')
-@:headerCode('#include "api_sundown.h"')
-@:headerClassCode('HxSundown* sundown;')
 class Sundown {
 	
 	// public fields
@@ -30,27 +29,25 @@ class Sundown {
 	public function new(?ex:Extensions = null):Void {
 		ext = 0;
 		if (ex != null) parseExtensions(ex);
-		this.create();
+		hx_html_render(cb, opt);
+		md = hx_create(ext, cb, opt );
 	}
 	
-	@:functionCode('Sundown_obj::output = sundown->markdown_render(::cpp::Utf8_obj::encode(markdown));')
 	public function render(markdown:String):String {
+		output = hx_sundown_render(markdown, md);
 		return output;
 	}
 	
-	@:functionCode('sundown->markdown_free();')
-	public function close():Void { }
-	
-	// private fields
+	public function close():Void {
+		hx_sundown_free(md);
+	}
 	
 	private var ext:Int;
+	private var md:Dynamic;
+	private var cb:Dynamic = { };
+	private var opt:Dynamic = { };
 	
 	private var output:String;
-	// force utf8 to be included in the source by hxcpp
-	private static var o:String = Utf8.encode('');
-	
-	@:functionCode('sundown = new HxSundown;\nsundown->markdown_new(Sundown_obj::ext);')
-	private function create():Void { }
 	
 	private function parseExtensions(ex:Extensions):Void {
 		if (ex.no_intra_emphasis) ext += (1<<0);
@@ -62,5 +59,10 @@ class Sundown {
 		if (ex.space_headers) ext += (1<<6);
 		if (ex.superscript) ext += (1<<7);
 	}
+	
+	private static var hx_create:Int->Dynamic->Dynamic->Dynamic = Lib.load('sundown', 'hx_sundown_create', 3);
+	private static var hx_html_render:Dynamic->Dynamic->Void = Lib.load('sundown', 'hx_html_renderer_create', 2);
+	private static var hx_sundown_render:String->Dynamic->String = Lib.load('sundown', 'hx_sundown_render', 2);
+	private static var hx_sundown_free:Dynamic->Void = Lib.load('sundown', 'hx_sundown_free', 1);
 	
 }

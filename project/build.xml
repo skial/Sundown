@@ -48,12 +48,10 @@
 		<!--<depend name="common/api_sundown.h" />-->
 	</files>
 	
-	<section if="windows">
-		<set name="LIB_CPU_TYPE" value="x86" unless="HXCPP_M64"/>
-		<set name="LIB_CPU_TYPE" value="x64" if="HXCPP_M64"/>
-    </section>
+	<set name="ndll-tool" value="dll" unless="iphone"/>
+	<set name="ndll-tool" value="static" if="iphone"/>
 	
-	<target id="sundown" output="sundown" tool="linker" toolid="static_link">
+	<target id="sundown" output="sundown" tool="linker" toolid="${ndll-tool}">
 		<outdir name="../ndll/${BINDIR}" />
 		<ext value=".ndll"/>
 		<files id="libsundown.common" />

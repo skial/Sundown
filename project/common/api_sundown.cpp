@@ -3,12 +3,10 @@
 #include <String.h>
 #include <string>
 #include "api_sundown.h"*/
+#include "markdown.h"
+#include "buffer.h"
+#include "html.h"
 
-extern "C" {
-	#include "markdown.h"
-	#include "buffer.h"
-	#include "html.h"
-}
 
 /*HxSundown::HxSundown() {}
 HxSundown::~HxSundown() {}
