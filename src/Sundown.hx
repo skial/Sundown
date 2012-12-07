@@ -2,6 +2,7 @@ package ;
 
 #if cpp
 import cpp.Lib;
+import haxe.Utf8;
 #elseif neko
 import neko.Lib;
 #end
@@ -24,34 +25,16 @@ typedef Extensions = {
 
 class Sundown {
 	
-	// public fields
-	
-	public function new(?ex:Extensions = null):Void {
+	public static function render(markdown:String, ?ex:Extensions):String {
 		ext = 0;
-		cb = { };
-		opt = { };
 		if (ex != null) parseExtensions(ex);
-		hx_html_render(cb, opt);
-		md = hx_create(ext, cb, opt );
+		return hx_sundown_render(markdown, ext);
 	}
 	
-	public function render(markdown:String):String {
-		output = hx_sundown_render(markdown, md);
-		return output;
-	}
+	private static var ext:Int;
+	private static var output:String;
 	
-	public function close():Void {
-		hx_sundown_free(md);
-	}
-	
-	private var ext:Int;
-	private var md:Dynamic;
-	private var cb:Dynamic;
-	private var opt:Dynamic;
-	
-	private var output:String;
-	
-	private function parseExtensions(ex:Extensions):Void {
+	private static function parseExtensions(ex:Extensions):Void {
 		if (ex.no_intra_emphasis) ext += (1<<0);
 		if (ex.tables) ext += (1<<1);
 		if (ex.fenced_code) ext += (1<<2);
@@ -62,9 +45,5 @@ class Sundown {
 		if (ex.superscript) ext += (1<<7);
 	}
 	
-	private static var hx_create:Int->Dynamic->Dynamic->Dynamic = Lib.load('sundown', 'hx_sundown_create', 3);
-	private static var hx_html_render:Dynamic->Dynamic->Void = Lib.load('sundown', 'hx_html_renderer_create', 2);
-	private static var hx_sundown_render:String->Dynamic->String = Lib.load('sundown', 'hx_sundown_render', 2);
-	private static var hx_sundown_free:Dynamic->Void = Lib.load('sundown', 'hx_sundown_free', 1);
-	
+	private static var hx_sundown_render = Lib.load('sundown', 'hx_sundown', 2);
 }

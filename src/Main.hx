@@ -1,10 +1,8 @@
 package ;
 
 import Sundown;
-import cpp.io.File;
-import cpp.Lib;
-import cpp.Utf8;
 import haxe.unit.TestRunner;
+import sys.io.File;
 import test.TestExtensions;
 import test.TestH1;
 
@@ -24,12 +22,8 @@ class Main {
 		
 		runner.run();
 		
-		/*var sd:Sundown = new Sundown();
-		var md = sd.render(File.getContent('readme.md'));
-		var file = File.write('readme1.html');
-		file.writeString(md);
-		file.close();
-		sd.close();*/
+		var md = Sundown.render(File.getContent('readme.md'));
+		File.saveContent('readme_new.html', md);
 	}
 	
 }

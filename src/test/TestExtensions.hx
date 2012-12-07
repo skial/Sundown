@@ -11,7 +11,7 @@ using StringTools;
 
 class TestExtensions extends TestCase {
 	
-	public var sd:Sundown;
+	//public var sd:Sundown;
 	public var ex:Extensions;
 	public var no_intra_emphasis:String;
 	public var fenced_code:String;
@@ -26,7 +26,7 @@ class TestExtensions extends TestCase {
 		autolink:true, strikethrough:true, lax_html_blocks:true, 
 		space_headers:true, superscript:true };
 		
-		sd = new Sundown(ex);
+		//sd = new Sundown(ex);
 		
 		no_intra_emphasis = 'sundown_is_using_no_intra_emphasis';
 		fenced_code = '```var sd:Sundown = new Sundown();```';
@@ -34,43 +34,37 @@ class TestExtensions extends TestCase {
 	}
 	
 	public function testNoIntraEmphasis() {
-		var o = sd.render(no_intra_emphasis);
-		trace(o);
+		var o = Sundown.render(no_intra_emphasis, ex);
 		assertEquals('<p>'+no_intra_emphasis+'</p>', o.trim());
 	}
 	
 	public function testFencedCode() {
-		var o = sd.render(fenced_code);
-		trace(o);
+		var o = Sundown.render(fenced_code, ex);
 		assertEquals('<p><code>var sd:Sundown = new Sundown();</code></p>', o.trim());
 	}
 	
 	public function testAutolink() {
-		var o = sd.render(autolink);
-		trace(o);
+		var o = Sundown.render(autolink, ex);
 		assertEquals('<p><a href="' + autolink + '">' + autolink + '</a></p>', o.trim());
 	}
 	
 	public function testStrikethrough() {
-		var o = sd.render('~~strikethrough~~');
-		trace(o);
+		var o = Sundown.render('~~strikethrough~~', ex);
 		assertEquals('<p><del>strikethrough</del></p>', o.trim());
 	}
 	
 	public function testSpaceHeader() {
-		var o = sd.render('#this header will fail#');
-		trace(o);
+		var o = Sundown.render('#this header will fail#', ex);
 		assertFalse(o == '<h1>this header will fail</h1>');
 	}
 	
 	public function testSuperscript() {
-		var o = sd.render('this is the 2^(nd) time');
-		trace(o);
+		var o = Sundown.render('this is the 2^(nd) time', ex);
 		assertEquals('<p>this is the 2<sup>nd</sup> time</p>', o.trim());
 	}
 	
 	override public function tearDown():Void {
-		sd.close();
+		//sd.close();
 	}
 	
 }
