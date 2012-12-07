@@ -14,8 +14,6 @@ import test.TestH1;
 class Main {
 	
 	static function main() {
-		//new Sundown(); // anything saved to file after this statment is mangled if uncommented...
-		
 		var runner:TestRunner = new TestRunner();
 		runner.add(new TestH1());
 		runner.add(new TestExtensions());
