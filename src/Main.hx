@@ -24,12 +24,12 @@ class Main {
 		
 		runner.run();
 		
-		var sd:Sundown = new Sundown();
+		/*var sd:Sundown = new Sundown();
 		var md = sd.render(File.getContent('readme.md'));
 		var file = File.write('readme1.html');
 		file.writeString(md);
 		file.close();
-		sd.close();
+		sd.close();*/
 	}
 	
 }
