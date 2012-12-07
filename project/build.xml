@@ -54,7 +54,7 @@
     </section>
 	
 	<target id="sundown" output="sundown" tool="linker" toolid="static_link">
-		<outdir name="../ndll/${BINDIR}/${LIB_CPU_TYPE}" />
+		<outdir name="../ndll/${BINDIR}" />
 		<ext value=".ndll"/>
 		<files id="libsundown.common" />
 	</target>

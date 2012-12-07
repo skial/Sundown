@@ -69,7 +69,7 @@ static value hx_sundown_render(value md_string, value markdown) {
 	
 	val_check_kind(markdown, k_sd_markdown);
 	
-	buf *output_buf = bufnew(128);
+	buf *output_buf = bufnew(val_strlen(md_string));
 	sd_markdown_render(output_buf,  reinterpret_cast<const uint8_t*>(val_string(md_string)), val_strlen(md_string), (sd_markdown*)val_data(markdown));
 	
 	value output = alloc_string(reinterpret_cast<const char*>(output_buf->data));
